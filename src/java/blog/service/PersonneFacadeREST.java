@@ -24,7 +24,7 @@ import javax.ws.rs.Produces;
  * @author Lotus
  */
 @Stateless
-@Path("blog.entities.personne")
+@Path("personne")
 public class PersonneFacadeREST extends AbstractFacade<Personne> {
     @PersistenceContext(unitName = "BlogPU")
     private EntityManager em;
