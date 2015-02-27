@@ -6,65 +6,41 @@
 package blog.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Yo
+ * @author Lotus
  */
 @Entity
 @XmlRootElement
-public class Article implements Serializable {
+public class Role extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titre;
-    private String contenu;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date postDate;
+    private String name;
 
-    public Article(){
-        
-    }
-    
-    public Article(Long id, String titre, String contenu, Date postDate) {
-        this.id = id;
-        this.titre = titre;
-        this.contenu = contenu;
-        this.postDate = postDate;
+    public String getName() {
+        return name;
     }
 
-    public String getTitre() {
-        return titre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public String getDescription() {
+        return description;
     }
 
-    public String getContenu() {
-        return contenu;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
-
+    private String description;        
     public Long getId() {
         return id;
     }
@@ -83,10 +59,10 @@ public class Article implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Article)) {
+        if (!(object instanceof Role)) {
             return false;
         }
-        Article other = (Article) object;
+        Role other = (Role) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -95,7 +71,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "blog.entities.Article[ id=" + id + " ]";
+        return "blog.entities.Role[ id=" + id + " ]";
     }
     
 }

@@ -16,54 +16,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Yo
+ * @author Lotus
  */
 @Entity
 @XmlRootElement
-public class Article implements Serializable {
+public class Personne implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titre;
-    private String contenu;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date postDate;
-
-    public Article(){
-        
-    }
-    
-    public Article(Long id, String titre, String contenu, Date postDate) {
-        this.id = id;
-        this.titre = titre;
-        this.contenu = contenu;
-        this.postDate = postDate;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
+    private String nom; 
+    private String prenom; 
+    private String sexe; 
+    private String photo; 
+    private String email; 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateDenaissance; 
 
     public Long getId() {
         return id;
@@ -83,10 +51,10 @@ public class Article implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Article)) {
+        if (!(object instanceof Personne)) {
             return false;
         }
-        Article other = (Article) object;
+        Personne other = (Personne) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -95,7 +63,55 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "blog.entities.Article[ id=" + id + " ]";
+        return "fr.unice.miage.ntdp.bibliotheque.Personne[ id=" + id + " ]";
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDateDenaissance() {
+        return dateDenaissance;
+    }
+
+    public void setDateDenaissance(Date dateDenaissance) {
+        this.dateDenaissance = dateDenaissance;
     }
     
 }

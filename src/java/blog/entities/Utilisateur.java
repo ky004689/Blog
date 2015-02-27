@@ -6,10 +6,12 @@
 package blog.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -18,68 +20,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-public class Utilisateur implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Utilisateur extends Personne implements Serializable {
+  private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String prenom;
-    private String nom;
-    private String email;
-    private String password;
+    private String nomUtilisateur; 
+    private String motDePasse; 
+    private UserStatus statutCompte; 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date derniereConnexion; 
     
-    public Utilisateur(Long id, String prenom, String nom, String email, String password) {
-        this.id = id;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.email = email;
-        this.password = password;
-    }
-    
-    public Utilisateur(){
-        
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -102,7 +53,39 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "blog.entities.Utilisateur[ id=" + id + " ]";
+        return "Users[ id=" + id + " ]";
+    }
+
+    public Date getDerniereConnexion() {
+        return derniereConnexion;
+    }
+
+    public void setDerniereConnexion(Date derniereConnexion) {
+        this.derniereConnexion = derniereConnexion;
+    }
+
+    public String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
+
+    public void setNomUtilisateur(String nomUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
+    public UserStatus getStatutCompte() {
+        return statutCompte;
+    }
+
+    public void setStatutCompte(UserStatus statutCompte) {
+        this.statutCompte = statutCompte;
     }
     
 }

@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Yo
+ * @author Lotus
  */
 @Stateless
 @Path("blog.entities.article")
