@@ -11,62 +11,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Yo
+ * @author Lotus
  */
 @Entity
 @XmlRootElement
-public class Article implements Serializable {
-     @OneToMany(mappedBy = "article")
+public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titre;
-    private String contenu;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date postDate;
+private String comment;
+ @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+private Date comment_date;
 
-    public Article(){
-        
-    }
-    
-    public Article(Long id, String titre, String contenu, Date postDate) {
-        this.id = id;
-        this.titre = titre;
-        this.contenu = contenu;
-        this.postDate = postDate;
+    public String getComment() {
+        return comment;
     }
 
-    public String getTitre() {
-        return titre;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public Date getComment_date() {
+        return comment_date;
     }
 
-    public String getContenu() {
-        return contenu;
+    public void setComment_date(Date comment_date) {
+        this.comment_date = comment_date;
     }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
-
     public Long getId() {
         return id;
     }
@@ -85,10 +62,10 @@ public class Article implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Article)) {
+        if (!(object instanceof Comment)) {
             return false;
         }
-        Article other = (Article) object;
+        Comment other = (Comment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -97,7 +74,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "blog.entities.Article[ id=" + id + " ]";
+        return "blog.entities.Comment[ id=" + id + " ]";
     }
     
 }

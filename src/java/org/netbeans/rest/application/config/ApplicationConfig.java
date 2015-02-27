@@ -36,6 +36,7 @@ public class ApplicationConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(blog.service.ArticleFacadeREST.class);
+        resources.add(blog.service.CommentFacadeREST.class);
         resources.add(blog.service.PersonneFacadeREST.class);
         resources.add(blog.service.RoleFacadeREST.class);
         resources.add(blog.service.UtilisateurFacadeREST.class);
