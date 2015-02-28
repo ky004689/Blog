@@ -215,7 +215,7 @@ jQuery(document).ready(function($){
         console.log(id);
 
         $("#article-"+id+" h2").html(titre);
-        $("#article-"+id+" .title").attr("rel","/Blog/resources/article/"+id);
+        $("#article-"+id+" .titre").attr("rel","/Blog/resources/article/"+id);
         $("#article-"+id+" .contenu").html(contenu);
 
         $("#article-"+id).css("background-color","#E3F6CE");

@@ -97,7 +97,7 @@ public class Article implements Serializable {
 
      @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", time=" + postDate + '}';
+        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", date=" + postDate + '}';
     }
     
 }

@@ -31,7 +31,7 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 @Path("article")
 public class ArticleFacadeREST extends AbstractFacade<Article> {
-    @PersistenceContext//(unitName = "BlogPU")
+    @PersistenceContext(unitName = "BlogPU")
     private EntityManager em;
  @Context 
   UriInfo uriInfo;
@@ -48,8 +48,8 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, "application/json"})
-    @Produces({"application/json"})
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, "application/json","application/xml"})
+    @Produces({"application/json","application/xml"})
     public Article edit(MultivaluedMap<String, String> inFormParams) {
         Article a = super.find(Long.parseLong(inFormParams.getFirst("id")));
         a.setContenu(inFormParams.getFirst("contenu"));
@@ -67,14 +67,14 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
 
     @GET
     @Path("{id}")
-    @Produces({"application/json"})
+    @Produces({"application/json","application/xml"})
     public Article find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({"application/json"})
+    @Produces({"application/json","application/xml"})
     public List<Article> findAll() {
         return super.findAll();
     }
