@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 jQuery(document).ready(function($){
     // Ce code est appelée quand la page est chargée ou reloadée
     // On charge les 5 derniers articles (ou moins) depuis le web service
@@ -12,7 +6,7 @@ jQuery(document).ready(function($){
     $("#update-article").hide();
 
     // URL du WS et fonction de callback en cas de succ-s
-    $.get("/Blog-Kraria-Sweyllam/resources/articles/0/5",function(data){
+    $.get("/Blog/resources/article/0/5",function(data){
         
         var i = 0;
         // no article ?
@@ -38,7 +32,7 @@ jQuery(document).ready(function($){
             // merci jQuery.
             $(data.article).each(function(){
                 i++
-                $("#list-article").prepend(renderItem(this.id, this.titre, this.content, this.time));
+                $("#list-article").prepend(renderItem(this.id, this.titre, this.contenu, this.postDate));
             });
             if(i==0)
                 showWelcome();
@@ -65,15 +59,18 @@ jQuery(document).ready(function($){
         // On récupère le contenu du formulaire en JSON
         var data = $("#form-article").serializeArray();
         // On fait un POST sur le web service d'insertion
-        $.post("/Blog-Kraria-Sweyllam/resources/articles",data,function(d){
+        $.post("/Blog/resources/article",data,function(d){
             $("#form-article").each(function(){
                 this.reset();
             });
             // On ajoute l'article dans la page
             $.get(d,function(data){
-                $("#list-article").prepend(renderItem(data.id, data.titre, data.content, data.time));  
+                $("#list-article").prepend(renderItem(data.id, data.titre, data.contenu, data.postDate));  
             });
         });
+       
+       // Il y a au moins un article, on supprime le message de bienvenue
+        $("#welcome").remove();
        
         if(removeLoadMore()){
             $("#loadmore").remove();
@@ -115,7 +112,7 @@ jQuery(document).ready(function($){
         $.get(url,function(data){
 
             $("#formupdate-article #titre").val(data.titre);
-            $("#formupdate-article #content").val(data.content);
+            $("#formupdate-article #contenu").val(data.contenu);
             $("#formupdate-article #id").val(data.id);
 
             $("#write-article").hide();
@@ -136,7 +133,7 @@ jQuery(document).ready(function($){
         console.log(data);
         
         $.ajax({
-            url: "/Blog-Kraria-Sweyllam/resources/articles",
+            url: "/Blog/resources/article",
             type:"PUT",
             data: data,
             success: function(d){
@@ -144,7 +141,7 @@ jQuery(document).ready(function($){
                     this.reset();
                 });
 
-                updateRenderedItem(d.id, d.titre, d.content, d.time)
+                updateRenderedItem(d.id, d.titre, d.contenu, d.postDate)
 
                 $("#update-article").hide();
                 $("#write-article").show();
@@ -165,12 +162,12 @@ jQuery(document).ready(function($){
         var count = $("#list-article").children().length;
         var limit = count+5;
 
-        $.get("/Blog-Kraria-Sweyllam/resources/articles/"+count+"/"+limit,function(data){
+        $.get("/Blog/resources/article/"+count+"/"+limit,function(data){
           
 
             $(data).each(function(){
                
-                $("#list-article").append(renderItem(this.id, this.titre, this.content, this.time));
+                $("#list-article").append(renderItem(this.id, this.titre, this.contenu, this.postDate));
             });
             if(removeLoadMore()){
                 $("#loadmore").remove();
@@ -183,7 +180,7 @@ jQuery(document).ready(function($){
 
     function removeLoadMore()
     {
-        $.get("/Blog-Kraria-Sweyllam/resources/articles/count",function(data){
+        $.get("/Blog/resources/article/count",function(data){
             var i = $("#list-article").children().length;
             console.log("dans la bd : "+data+" | sur le site : "+i);
             if(data == i){
@@ -194,32 +191,32 @@ jQuery(document).ready(function($){
     }
 
     // creation et ajout d'un article dans la page
-    function renderItem(id, titre, content, date)
+    function renderItem(id, titre, contenu, postDate)
     {
-        var myDate = new Date( date );
+        var myDate = new Date( postDate );
         var strDate = "";
         strDate += myDate.getUTCDate()+"/"+myDate.getMonth()+"/"+myDate.getFullYear();
         strDate += " à "+myDate.getHours()+":"+myDate.getMinutes();
         return "<div class='article' id='article-"+id+"'>\
                 <h2>"+titre+"</h2></a>\
-                <p class='content'>"+content+"</p>\
+                <p class='contenu'>"+contenu+"</p>\
                 <div class='postmeta'>\n\
                     <p class='alignleft'>Article publi&eacute; le "+strDate+"</p>\n\
                     <p class='alignright'>\n\
-                        <a class='button blue delete' href='/Blog-Kraria-Sweyllam/resources/articles/"+id+"'>Supprimer</a>\n\
-                        <a href='/Blog-Kraria-Sweyllam/resources/articles/"+id+"' class='button blue title'>Modifier</a>\
+                        <a class='button blue delete' href='/Blog/resources/article/"+id+"'>Supprimer</a>\n\
+                        <a href='/Blog/resources/article/"+id+"' class='button blue title'>Modifier</a>\
                     </p></div>\n\
                     <div class='clearfix'></div>\
                 </div>";
     }
 
-    function updateRenderedItem(id, titre, content)
+    function updateRenderedItem(id, titre, contenu)
     {
         console.log(id);
 
         $("#article-"+id+" h2").html(titre);
-        $("#article-"+id+" .title").attr("rel","/Blog-Kraria-Sweyllam/resources/articles/"+id);
-        $("#article-"+id+" .content").html(content);
+        $("#article-"+id+" .title").attr("rel","/Blog/resources/article/"+id);
+        $("#article-"+id+" .contenu").html(contenu);
 
         $("#article-"+id).css("background-color","#E3F6CE");
         window.setTimeout(function() {  

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class Article implements Serializable {
-     @OneToMany(mappedBy = "article")
+     //@OneToMany(mappedBy = "article")
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +36,7 @@ public class Article implements Serializable {
         
     }
     
-    public Article(Long id, String titre, String contenu, Date postDate) {
+    public Article(String titre, String contenu) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
@@ -95,9 +95,9 @@ public class Article implements Serializable {
         return true;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "blog.entities.Article[ id=" + id + " ]";
+        return "Article{" + "id=" + id + ", titre=" + titre + ", contenu=" + contenu + ", time=" + postDate + '}';
     }
     
 }
