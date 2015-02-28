@@ -31,7 +31,7 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 @Path("article")
 public class ArticleFacadeREST extends AbstractFacade<Article> {
-    @PersistenceContext//(unitName = "BlogPU")
+    @PersistenceContext(unitName = "BlogPU")
     private EntityManager em;
  @Context 
   UriInfo uriInfo;
