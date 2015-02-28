@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
     $("#update-article").hide();
 
     // URL du WS et fonction de callback en cas de succ-s
-    $.get("/Blog/resources/article/0/5",function(data){
+    $.get("/Blog/webresources/article/0/5",function(data){
         
         var i = 0;
         // no article ?
@@ -59,7 +59,7 @@ jQuery(document).ready(function($){
         // On récupère le contenu du formulaire en JSON
         var data = $("#form-article").serializeArray();
         // On fait un POST sur le web service d'insertion
-        $.post("/Blog/resources/article",data,function(d){
+        $.post("/Blog/webresources/article",data,function(d){
             $("#form-article").each(function(){
                 this.reset();
             });
@@ -133,7 +133,7 @@ jQuery(document).ready(function($){
         console.log(data);
         
         $.ajax({
-            url: "/Blog/resources/article",
+            url: "/Blog/webresources/article",
             type:"PUT",
             data: data,
             success: function(d){
@@ -162,7 +162,7 @@ jQuery(document).ready(function($){
         var count = $("#list-article").children().length;
         var limit = count+5;
 
-        $.get("/Blog/resources/article/"+count+"/"+limit,function(data){
+        $.get("/Blog/webresources/article/"+count+"/"+limit,function(data){
           
 
             $(data).each(function(){
@@ -180,7 +180,7 @@ jQuery(document).ready(function($){
 
     function removeLoadMore()
     {
-        $.get("/Blog/resources/article/count",function(data){
+        $.get("/Blog/webresources/article/count",function(data){
             var i = $("#list-article").children().length;
             console.log("dans la bd : "+data+" | sur le site : "+i);
             if(data == i){
@@ -203,8 +203,8 @@ jQuery(document).ready(function($){
                 <div class='postmeta'>\n\
                     <p class='alignleft'>Article publi&eacute; le "+strDate+"</p>\n\
                     <p class='alignright'>\n\
-                        <a class='button blue delete' href='/Blog/resources/article/"+id+"'>Supprimer</a>\n\
-                        <a href='/Blog/resources/article/"+id+"' class='button blue title'>Modifier</a>\
+                        <a class='button blue delete' href='/Blog/webresources/article/"+id+"'>Supprimer</a>\n\
+                        <a href='/Blog/webresources/article/"+id+"' class='button blue title'>Modifier</a>\
                     </p></div>\n\
                     <div class='clearfix'></div>\
                 </div>";
@@ -215,7 +215,7 @@ jQuery(document).ready(function($){
         console.log(id);
 
         $("#article-"+id+" h2").html(titre);
-        $("#article-"+id+" .title").attr("rel","/Blog/resources/article/"+id);
+        $("#article-"+id+" .title").attr("rel","/Blog/webresources/article/"+id);
         $("#article-"+id+" .contenu").html(contenu);
 
         $("#article-"+id).css("background-color","#E3F6CE");
